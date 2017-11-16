@@ -274,3 +274,10 @@ end
 def url_encode(str)
   CGI.escape(str).gsub("+", "%20")
 end
+
+# Generate random string to be used for file or directory name
+#
+# @return [ String ]
+def random_name
+  Digest::MD5.hexdigest(rand(999_999_999).to_s)
+end

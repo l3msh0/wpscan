@@ -73,5 +73,9 @@ class WpPlugins < WpItems
       wp_plugins
     end
 
+    # @return [ String ]
+    def item_404_hash(wp_target)
+      wp_target.plugin_404_hash
+    end
   end
 end

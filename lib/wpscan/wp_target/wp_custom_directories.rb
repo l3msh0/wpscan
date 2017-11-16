@@ -45,5 +45,13 @@ class WpTarget < WebSite
       Browser.get(@uri.merge(wp_plugins_dir).to_s).code != 404
     end
 
+    # @return [ String ] The wp-themes directory
+    def wp_themes_dir
+      unless @wp_themes_dir
+        @wp_themes_dir = "#{wp_content_dir}/themes"
+      end
+      @wp_themes_dir
+    end
+
   end
 end

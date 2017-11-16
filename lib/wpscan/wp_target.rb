@@ -117,7 +117,10 @@ class WpTarget < WebSite
       version: version,
       wp_content_dir: wp_content_dir,
       wp_plugins_dir: wp_plugins_dir
-    ).exists?
+    ).exists?(
+      error_404_hash: plugin_404_hash,
+      homepage_hash: homepage_hash
+    )
   end
 
   # @return [ Boolean ]
@@ -176,5 +179,19 @@ class WpTarget < WebSite
 
   def include_directory_listing_enabled?
     directory_listing_enabled?(includes_dir_url)
+  end
+
+  def plugin_404_hash
+    unless @plugin_404_hash
+      @plugin_404_hash = WebSite.page_hash(@uri.merge("#{wp_plugins_dir}/#{random_name}/"))
+    end
+    @plugin_404_hash
+  end
+
+  def theme_404_hash
+    unless @theme_404_hash
+      @theme_404_hash = WebSite.page_hash(@uri.merge("#{wp_themes_dir}/#{random_name}/"))
+    end
+    @theme_404_hash
   end
 end

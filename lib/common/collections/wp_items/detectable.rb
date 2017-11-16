@@ -19,7 +19,7 @@ class WpItems < Array
       progress_bar     = progress_bar(targets.size, options)
       queue_count      = 0
       exist_options    = {
-        error_404_hash:  wp_target.error_404_hash,
+        error_404_hash:  item_404_hash(wp_target),
         homepage_hash:   wp_target.homepage_hash,
         exclude_content: options[:exclude_content] ? %r{#{options[:exclude_content]}} : nil
       }
@@ -235,6 +235,11 @@ class WpItems < Array
     # @return [ Class ]
     def item_class
       Object.const_get(self.to_s.gsub(/.$/, ''))
+    end
+
+    # @return [ String ]
+    def item_404_hash(wp_target)
+      wp_target.error_404_hash
     end
   end
 end

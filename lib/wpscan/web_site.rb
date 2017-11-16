@@ -115,8 +115,7 @@ class WebSite
   # Return the MD5 hash of a 404 page
   def error_404_hash
     unless @error_404_hash
-      non_existant_page = Digest::MD5.hexdigest(rand(999_999_999).to_s) + '.html'
-      @error_404_hash   = WebSite.page_hash(@uri.merge(non_existant_page).to_s)
+      @error_404_hash   = WebSite.page_hash(@uri.merge("#{random_name}.html").to_s)
     end
     @error_404_hash
   end
